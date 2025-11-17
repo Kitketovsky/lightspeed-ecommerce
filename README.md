@@ -1,48 +1,88 @@
-# lightspeed-test-task
+## Test task for TypeScript/Vue.js developer in Ecwid
 
-This template should help get you started developing with Vue 3 in Vite.
+## Goal
 
-## Recommended IDE Setup
+Write an application that contains three pages:
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- A page with a list of categories and products
+- product page
+- shopping cart page
 
-## Recommended Browser Setup
+### Data
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Store data must be accessed using [Ecwid REST API](https://api-docs.ecwid.com/reference/rest-api)
 
-## Type Support for `.vue` Imports in TS
+The easiest way is to use a demo store. It's access info is like this:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- StoreID: 108362264
+- Token: public_RiNvjTVVzKLhFNWyzR5fNY68u1GMHLEs
 
-## Customize configuration
+### Page «products and categories list»
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+The page contains a list of products and categories in any convenient format: grid, list table.
 
-## Project Setup
+Category page content:
 
-```sh
-pnpm install
-```
+- category name
+- category image
 
-### Compile and Hot-Reload for Development
+Product page content:
 
-```sh
-pnpm dev
-```
+- product name
+- product price
+- product image
+- buy button
 
-### Type-Check, Compile and Minify for Production
+#### Opening category details
 
-```sh
-pnpm build
-```
+When you click on a category, the app takes you to a page with subcategories and products belonging to that category.
 
-### Lint with [ESLint](https://eslint.org/)
+#### Opening product details
 
-```sh
-pnpm lint
-```
+When you click on a product, the app goes to the Product Details page.
+
+### «Product details» page
+
+The page contains details about the product:
+
+- product name
+- product description
+- product image
+- product price
+- buy button
+
+### «Buy» button
+
+The button adds an item to the "cart"
+Shopping cart - any local storage with a list of added items.
+
+### «Cart» icon
+
+All pages display a cart icon with the number of items added to it. When you click on the icon, the application goes to the "Shopping cart" page
+
+### «Cart» page
+
+The page contains a list of added items and the "Place order" button.
+Any item in the list can be deleted by clicking on the "Delete" button.
+
+### Page navigation
+
+The page state is displayed in the url. When you navigate to a url, the page that belongs to that url is displayed.
+
+### «Place order» button
+
+When you click on the button, a text congratulating you on your purchase is shown.
+
+## Technologies
+
+- Typescript
+- VueJS
+- HTML/CSS
+
+## Design
+
+Pages should look nice and readable. You can use any CSS framework.
+
+## Code sharing platform
+
+You can upload the code to your GitHub/Bitbucket or use the Web IDE: https://codesandbox.io.
