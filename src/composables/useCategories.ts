@@ -1,17 +1,16 @@
-import { defineStore } from 'pinia'
+import { useQuery } from '@tanstack/vue-query'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { $api } from '../api'
-import { useQuery } from '@tanstack/vue-query'
 
-export const useCategoriesStore = defineStore('categories', () => {
+export function useCategories() {
   const route = useRoute()
 
   const currentCategoryId = computed(() =>
     route.params.categoryId ? Number(route.params.categoryId) : null,
   )
 
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['categories'],
     queryFn: $api.categories.getCategories,
     select: (data) => data.items,
@@ -29,10 +28,5 @@ export const useCategoriesStore = defineStore('categories', () => {
     return filteredCategories
   })
 
-  return {
-    categories: filteredCategories,
-    isLoading,
-    isSuccess,
-    currentCategoryId,
-  }
-})
+  return { filteredCategories, isLoading, isError }
+}

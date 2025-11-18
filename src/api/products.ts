@@ -16,10 +16,6 @@ export default (http: typeof HttpType) => ({
       ...(categoryId && { category: categoryId }),
     }
 
-    if (categoryId) {
-      query.category = categoryId
-    }
-
     return await http<ApiGetProductsResponse>('/products', {
       query,
     })
