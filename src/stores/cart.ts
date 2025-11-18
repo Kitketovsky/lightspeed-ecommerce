@@ -1,100 +1,69 @@
 import { defineStore } from 'pinia'
 import type { StoreProduct } from '../types/products'
-import { computed, ref, watch } from 'vue'
 
 export interface CartItem {
-  product: StoreProduct
-  quantity: number
+	product: StoreProduct
+	quantity: number
 }
 
-const CART_STORAGE_KEY = 'ecwid-cart'
+export const useCartStore = defineStore('cart', {
+	state() {
+		return {
+			cart: [] as CartItem[],
+		}
+	},
 
-export const useCartStore = defineStore('cart', () => {
-  const items = ref<CartItem[]>([])
-  const orderPlaced = ref(false)
+	getters: {
+		totalItems: (state) =>
+			state.cart.reduce((total, curr) => total + curr.quantity, 0),
 
-  const totalItems = computed(() =>
-    items.value.reduce((total, item) => total + item.quantity, 0),
-  )
+		totalPrice: (state) =>
+			state.cart.reduce(
+				(total, curr) => total + curr.product.price * curr.quantity,
+				0,
+			),
 
-  const totalPrice = computed(() =>
-    items.value.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0,
-    ),
-  )
+		isCartEmpty: (state) => state.cart.length === 0,
+	},
 
-  const isCartEmpty = computed(() => items.value.length === 0)
+	actions: {
+		addItem(product: StoreProduct) {
+			const existingItem = this.cart.find(
+				(item) => item.product.id === product.id,
+			)
 
-  watch(
-    items,
-    () => {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items.value))
-    },
-    { deep: true },
-  )
+			if (existingItem) {
+				existingItem.quantity++
+			} else {
+				this.cart.push({
+					product,
+					quantity: 1,
+				})
+			}
+		},
 
-  function loadFromLocalStorage() {
-    try {
-      const stored = localStorage.getItem(CART_STORAGE_KEY)
-      if (stored) {
-        items.value = JSON.parse(stored)
-      }
-    } catch (error) {
-      console.error('Failed to load cart from localStorage:', error)
-      items.value = []
-    }
-  }
+		removeItem(productId: number) {
+			const index = this.cart.findIndex((item) => item.product.id === productId)
 
-  function addItem(product: StoreProduct) {
-    const existingItem = items.value.find(
-      (item) => item.product.id === product.id,
-    )
+			if (index !== -1) {
+				this.cart.splice(index, 1)
+			}
+		},
 
-    if (existingItem) {
-      existingItem.quantity++
-    } else {
-      items.value.push({
-        product,
-        quantity: 1,
-      })
-    }
-  }
+		updateQuantity(productId: number, quantity: number) {
+			const item = this.cart.find((item) => item.product.id === productId)
 
-  function removeItem(productId: number) {
-    const index = items.value.findIndex((item) => item.product.id === productId)
+			if (item) {
+				if (quantity <= 0) {
+					this.removeItem(productId)
+				} else {
+					item.quantity = quantity
+				}
+			}
+		},
 
-    if (index !== -1) {
-      items.value.splice(index, 1)
-    }
-  }
-
-  function updateQuantity(productId: number, quantity: number) {
-    const item = items.value.find((item) => item.product.id === productId)
-
-    if (item) {
-      if (quantity <= 0) {
-        removeItem(productId)
-      } else {
-        item.quantity = quantity
-      }
-    }
-  }
-
-  function clearCart() {
-    items.value = []
-  }
-
-  return {
-    items,
-    totalItems,
-    totalPrice,
-    isCartEmpty,
-    orderPlaced,
-    loadFromLocalStorage,
-    addItem,
-    updateQuantity,
-    clearCart,
-    removeItem,
-  }
+		clearCart() {
+			this.cart = []
+		},
+	},
 })
