@@ -1,4 +1,4 @@
-import type { ApiResponse } from './api'
+import type { ApiResponse } from '../api-types'
 
 export interface StoreProduct {
 	id: number

@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { type RouterLinkProps } from 'vue-router'
 import BreadcrumbItem from './UIBreadcrumbItem.vue'
+import type { Breadcrumbs } from './types'
 
 defineProps<{
-	breadcrumbs: {
-		id: string | number
-		name: string
-		options: RouterLinkProps['to']
-	}[]
+	breadcrumbs: Breadcrumbs
 }>()
 </script>
 
@@ -15,9 +11,9 @@ defineProps<{
 	<nav v-if="breadcrumbs.length > 1" aria-label="Breadcrumb">
 		<ol class="flex flex-wrap items-center gap-2">
 			<BreadcrumbItem
-				v-for="(item, index) in breadcrumbs"
-				v-bind="item"
-				:key="item.id ?? 'home'"
+				v-for="(breadcrumb, index) in breadcrumbs"
+				:key="breadcrumb.id"
+				:breadcrumb="breadcrumb"
 				:is-last="index === breadcrumbs.length - 1"
 			/>
 		</ol>

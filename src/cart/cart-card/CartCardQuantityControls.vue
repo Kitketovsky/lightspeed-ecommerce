@@ -6,10 +6,10 @@ defineProps<{
 	quantity: number
 }>()
 
-const emit = defineEmits<{
-	increment: []
-	decrement: []
-}>()
+const emit = defineEmits({
+	increment: null,
+	decrement: null,
+})
 </script>
 
 <template>

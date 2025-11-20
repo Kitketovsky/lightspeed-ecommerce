@@ -2,6 +2,7 @@
 import { onMounted, watch } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { useCartStore } from '../lib/stores/cart'
+
 import IconCart from '../lib/components/icons/IconCart.vue'
 import UIBadge from '../lib/components/ui/UIBadge.vue'
 

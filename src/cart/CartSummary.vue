@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UIButton from '../../lib/components/ui/UIButton.vue'
+import UIButton from '../lib/components/ui/UIButton.vue'
 
 defineProps<{
 	totalItems: number

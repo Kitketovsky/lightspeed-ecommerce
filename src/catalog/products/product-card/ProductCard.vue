@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import type { StoreProduct } from '../../../lib/types/products'
-
 import ProductCardImage from './ProductCardImage.vue'
 import ProductCardTitle from './ProductCardTitle.vue'
 import ProductCardPrice from './ProductCardPrice.vue'
 import ProductCardAddButton from './ProductCardAddButton.vue'
 
+import type { StoreProduct } from '../../../lib/api/products/products-types'
+
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<StoreProduct>()
 
-const emit = defineEmits<{
-	'add-to-cart': [product: StoreProduct]
-}>()
+const emit = defineEmits({
+	addToCart(product: StoreProduct) {
+		return !!product
+	},
+})
 
 const handleAddToCart = () => {
-	emit('add-to-cart', props)
+	emit('addToCart', props)
 }
 </script>
 

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import type { RouterLinkProps } from 'vue-router'
 import IconArrowRight from '../../icons/IconArrowRight.vue'
+import type { Breadcrumb } from './types'
 
 defineProps<{
-	id: string | number
-	name: string
-	options: RouterLinkProps['to']
+	breadcrumb: Breadcrumb
 	isLast: boolean
 }>()
 </script>
@@ -14,14 +12,14 @@ defineProps<{
 	<li class="flex items-center gap-2">
 		<RouterLink
 			v-if="!isLast"
-			:to="options"
+			:to="breadcrumb.options"
 			class="text-gray-600 transition-colors hover:text-indigo-600"
 		>
-			{{ name }}
+			{{ breadcrumb.name }}
 		</RouterLink>
 
 		<span v-else class="font-semibold text-gray-800">
-			{{ name }}
+			{{ breadcrumb.name }}
 		</span>
 
 		<IconArrowRight v-if="!isLast" />

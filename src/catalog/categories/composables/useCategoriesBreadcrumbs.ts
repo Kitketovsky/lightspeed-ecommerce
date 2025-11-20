@@ -1,17 +1,15 @@
-import { computed } from 'vue'
-import type { StoreCategory } from '../../../lib/types/categories'
-import { useCategories } from './useCategories'
-import type { RouterLinkProps } from 'vue-router'
+import { computed, type Ref } from 'vue'
 
-type Breadcrumbs = {
-	id: string | number
-	name: string
-	options: RouterLinkProps['to']
-}[]
+import type { Breadcrumbs } from '../../../lib/components/ui/breadcrumbs/types'
+import type { StoreCategory } from '../../../lib/api/categories/categories-types'
 
-export function useCategoriesBreadcrumbs() {
-	const { categories, currentCategoryId } = useCategories()
-
+export function useCategoriesBreadcrumbs({
+	categories,
+	currentCategoryId,
+}: {
+	categories: Ref<StoreCategory[], StoreCategory[]> | Ref<undefined, undefined>
+	currentCategoryId: Ref<number, number> | Ref<null, null>
+}) {
 	const breadcrumbs = computed<Breadcrumbs>(() => {
 		const items: Breadcrumbs = [
 			{

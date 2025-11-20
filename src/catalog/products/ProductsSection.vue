@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import UIDataView from '../../lib/components/ui/UIDataView.vue'
 
-import ProductsError from './components/ProductsError.vue'
-import ProductsEmpty from './components/ProductsEmpty.vue'
-import ProductsLoading from './components/ProductsLoading.vue'
-import ProductsGridLayout from './components/ProductsGridLayout.vue'
-import ProductCard from './components/ProductCard.vue'
+import ProductsError from './ProductsError.vue'
+import ProductsEmpty from './ProductsEmpty.vue'
+import ProductsLoading from './ProductsLoading.vue'
+import ProductsGridLayout from './ProductsGridLayout.vue'
+import ProductCard from './product-card/ProductCard.vue'
 
 import { useProducts } from './composables/useProducts'
 import { useCartStore } from '../../lib/stores/cart'
-import type { StoreProduct } from '../../lib/types/products'
+
+import type { StoreProduct } from '../../lib/api/products/products-types'
 
 const { data, isLoading, isError, error } = useProducts()
 
@@ -34,7 +35,7 @@ const handleAddToCart = (product: StoreProduct) => {
 					v-for="product in items"
 					v-bind="product"
 					:key="product.id"
-					@add-to-cart="handleAddToCart"
+					@addToCart="handleAddToCart"
 				/>
 			</ProductsGridLayout>
 		</template>

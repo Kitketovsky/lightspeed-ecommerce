@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import UISkeleton from '../../../lib/components/ui/UISkeleton.vue'
+import UISkeleton from '../../lib/components/ui/UISkeleton.vue'
 </script>
 
 <template>

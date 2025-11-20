@@ -1,8 +1,8 @@
-import type { http as HttpType } from './http'
+import type { http as HttpType } from '../http'
 import type {
 	ApiGetProductResponse,
 	ApiGetProductsResponse,
-} from '../types/products'
+} from './products-types'
 
 export default (http: typeof HttpType) => ({
 	async getProducts({

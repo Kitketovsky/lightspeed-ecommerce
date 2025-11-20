@@ -1,9 +1,9 @@
-import products from './products'
-import categories from './categories'
+import products from './products/products'
+import categories from './categories/categories'
 
 import { http } from './http'
 
 export const $api = {
-  products: products(http),
-  categories: categories(http),
+	products: products(http),
+	categories: categories(http),
 }

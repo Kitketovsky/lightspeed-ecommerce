@@ -1,17 +1,24 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import CategoriesError from './components/CategoriesError.vue'
-import CategoriesLoading from './components/CategoriesLoading.vue'
-import CategoriesGrid from './components/CategoriesGrid.vue'
-
 import UIDataView from '../../lib/components/ui/UIDataView.vue'
+import UIBreadcrumbs from '../../lib/components/ui/breadcrumbs/UIBreadcrumbs.vue'
 
 import { useCategories } from './composables/useCategories'
-import UIBreadcrumbs from '../../lib/components/ui/breadcrumbs/UIBreadcrumbs.vue'
 import { useCategoriesBreadcrumbs } from './composables/useCategoriesBreadcrumbs'
 
-const { filteredCategories, isLoading, isError, error } = useCategories()
+import CategoriesError from './CategoriesError.vue'
+import CategoriesLoading from './CategoriesLoading.vue'
+import CategoriesGrid from './CategoriesGrid.vue'
+
+const {
+	categories,
+	filteredCategories,
+	isLoading,
+	isError,
+	error,
+	currentCategoryId,
+} = useCategories()
 
 const isLeafCategory = computed(
 	() =>
@@ -21,7 +28,10 @@ const isLeafCategory = computed(
 		!isError.value,
 )
 
-const { breadcrumbs } = useCategoriesBreadcrumbs()
+const { breadcrumbs } = useCategoriesBreadcrumbs({
+	categories,
+	currentCategoryId,
+})
 </script>
 
 <template>

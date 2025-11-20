@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useCartStore } from '../lib/stores/cart'
 
-import CartEmpty from './components/CartEmpty.vue'
-import CartSummary from './components/CartSummary.vue'
+import CartCard from './cart-card/CartCard.vue'
+import CartEmpty from './CartEmpty.vue'
+import CartSummary from './CartSummary.vue'
+
 import UIDataView from '../lib/components/ui/UIDataView.vue'
-import CartCard from './components/CartCard.vue'
 
 const cartStore = useCartStore()
 

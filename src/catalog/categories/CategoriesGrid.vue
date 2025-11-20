@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { StoreCategory } from '../../../lib/types/categories'
-
+import type { StoreCategory } from '../../lib/types/categories'
 import CategoriesGridLayout from './CategoriesGridLayout.vue'
 import CategoryCard from './CategoryCard.vue'
 

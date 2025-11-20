@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
-import type { StoreCategory } from '../../../lib/types/categories'
+import type { StoreCategory } from '../../lib/api/categories/categories-types'
 
 defineProps<StoreCategory>()
 

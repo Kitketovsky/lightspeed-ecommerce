@@ -8,17 +8,25 @@ import CartCardRemoveButton from './CartCardRemoveButton.vue'
 
 const { product, quantity } = defineProps<CartItem>()
 
-const emit = defineEmits<{
-	remove: [productId: number]
-	'update-quantity': [productId: number, quantity: number]
-}>()
+const emit = defineEmits({
+	updateQuantity(productId: number, quantity: number) {
+		return (
+			typeof productId === 'number' &&
+			typeof quantity === 'number' &&
+			quantity >= 0
+		)
+	},
+	remove(productId: number) {
+		return typeof productId === 'number'
+	},
+})
 
 const handleIncrement = () => {
-	emit('update-quantity', product.id, quantity + 1)
+	emit('updateQuantity', product.id, quantity + 1)
 }
 
 const handleDecrement = () => {
-	emit('update-quantity', product.id, quantity - 1)
+	emit('updateQuantity', product.id, quantity - 1)
 }
 
 const handleRemove = () => {
