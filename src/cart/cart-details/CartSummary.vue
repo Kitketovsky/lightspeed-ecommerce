@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import UIButton from '../lib/components/ui/UIButton.vue'
+import UIButton from '../../lib/components/ui/UIButton.vue'
 
 defineProps<{
 	totalItems: number
 	totalPrice: number
 }>()
+
+const emit = defineEmits({
+	placeOrder: null,
+})
+
+function onPlaceOrder() {
+	emit('placeOrder')
+}
 </script>
 
 <template>
@@ -19,6 +27,6 @@ defineProps<{
 			<span class="text-green-600">${{ totalPrice.toFixed(2) }}</span>
 		</div>
 
-		<UIButton> Place Order </UIButton>
+		<UIButton @click="onPlaceOrder"> Place Order </UIButton>
 	</div>
 </template>

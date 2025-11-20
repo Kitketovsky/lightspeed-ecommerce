@@ -1,0 +1,47 @@
+<script setup lang="ts">
+import { useCartStore } from '../../lib/stores/cart'
+
+import UIDataView from '../../lib/components/ui/UIDataView.vue'
+
+import CartListLayout from './CartListLayout.vue'
+import CartCard from '../cart-card/CartCard.vue'
+import CartEmpty from './states/CartEmpty.vue'
+import CartSummary from './CartSummary.vue'
+
+const cartStore = useCartStore()
+
+const handleRemove = (productId: number) => {
+	cartStore.removeItem(productId)
+}
+
+const handleUpdateQuantity = (productId: number, quantity: number) => {
+	cartStore.updateQuantity(productId, quantity)
+}
+</script>
+
+<template>
+	<UIDataView :data="cartStore.cart" heading="Shopping Cart">
+		<template #list="{ items }">
+			<CartListLayout>
+				<CartCard
+					v-for="item in items"
+					:key="item.product.id"
+					v-bind="item"
+					@remove="handleRemove"
+					@update-quantity="handleUpdateQuantity"
+				/>
+			</CartListLayout>
+		</template>
+
+		<template #itemsEmpty>
+			<CartEmpty />
+		</template>
+
+		<template #footer>
+			<CartSummary
+				:total-items="cartStore.totalItems"
+				:total-price="cartStore.totalPrice"
+			/>
+		</template>
+	</UIDataView>
+</template>

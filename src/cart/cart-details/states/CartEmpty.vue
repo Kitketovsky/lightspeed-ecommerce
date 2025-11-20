@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IconCart from '../lib/components/icons/IconCart.vue'
-import { $router } from '../lib/router/router'
+import IconCart from '../../../lib/components/icons/IconCart.vue'
+import { $router } from '../../../lib/router/router'
 
 const continueShopping = () => {
 	$router.push('/')
