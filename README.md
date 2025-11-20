@@ -14,17 +14,19 @@ src/
 │   ├── categories/            # Categories feature
 │   └── products/              # Products feature
 ├── cart/                     # Shopping cart page
-│   └── components/            # Cart-specific components
+│   ├── cart-card/             # Individual cart item component
+│   └── cart-details/          # Cart details and summary
 ├── product/                  # Product detail page
 │   └── components/            # Product page components
+├── header/                   # Header component
 ├── not-found-page/           # 404 page
 │   └── components/            # Error page components
 └── lib/                      # Shared utilities
     ├── api/                   # API client
+    ├── assets/                # Global assets
     ├── components/            # Shared UI components
     ├── router/                # Router configuration
-    ├── stores/                # Pinia stores
-    └── types/                 # TypeScript types
+    └── stores/                # Pinia stores
 ```
 
 ## Installation
